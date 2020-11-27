@@ -1,35 +1,31 @@
 export default async function makeRequest(reqApi, form, method) {
     console.log("THIS IS TOKEN ")
     let response;
-    if (form === null) {
-        try {
-            response = await fetch(reqApi, {
+    let reqBody;
+    try {
+        if (form === null) {
+            reqBody = {
                 method: method,
                 headers: {
-                    'Accept': 'application/json'
+                    'Content-Type': 'application/json'
                 }
-
-
-            });
-        } catch (error) {
-            return false;
-
-        }
-    } else {
-        try {
-            response = await fetch(reqApi, {
+            }
+        } else {
+            reqBody = {
                 method: method,
                 body: JSON.stringify(form),
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            });
-        } catch (error) {
-            return false;
-
-
+            }
         }
+        response = await fetch(reqApi, reqBody);
+    } catch (error) {
+        return false;
+
+
     }
+
 
     if (response.ok) {
         const json = await response.json();
