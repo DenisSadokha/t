@@ -9,33 +9,19 @@ import store from "../store/StoreNotes"
 import storeLog from "../store/StoreLog"
 import Article from "./Article"
 import { Redirect } from "react-router"
-
-
-
-let arrNotes = [];
-let arr = [{
-  title: "newTitle",
-  body: "newTextForFirst",
-  done: false,
-  id: 2
-},
-{
-  title: "newTitle2",
-  body: "newTextForFirst2",
-  done: false,
-  id: 3
-}]
+import StoreCreate from "../store/StoreCreate";
 
 class Notes extends Component {
+  
   render() {
     console.log("render start")
-    arr = store.arrTask;
+    let arr = store.arrTask;
 
-    if (store.auth) {
+    if (store.isAuth) {
       if (arr.length > 0) {
         var tempNews = arr.map(function (item, index) {
           return <div key={arr.id}>
-            <Article art={item} token={store.token} />
+            <Article art={item} token={storeLog.token} />
           </div>
         });
       } else {
@@ -48,13 +34,13 @@ class Notes extends Component {
 
           <div>
             <Link to="/create">
-              <button onClick = {() => store.setToken(store.token)}>
+              <button onClick={() => storeLog.setToken(StoreCreate, storeLog.token)}>
                 Создать заметку
                </button>
             </Link>
             {tempNews}
           </div>
-  
+
         )
       } else {
         return (
@@ -63,7 +49,7 @@ class Notes extends Component {
           </div>
         )
       }
-      
+
 
 
 
