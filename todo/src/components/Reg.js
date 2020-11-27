@@ -11,6 +11,7 @@ class Reg extends Component {
 
 
     }
+    
     login = store.login;
     password = store.pass;
     passwordCheck = store.passCheck;
