@@ -1,8 +1,8 @@
 "use strict"
 import makeRequest from "../requestHelper/request"
+import { requestApi } from "../config"
 
 import { action, observable, decorate } from "mobx";
-const regApi = 'http://localhost:3001/api/Users'
 let form;
 class Store {
 
@@ -12,16 +12,11 @@ class Store {
     status;
     onRegistr(login, password, passCheck) {
         if (password === passCheck) {
-
-            // this.login=login;
-            // this.pass=password;
-            // this.passCheck=passCheck;
-            // this.status="вы зарегистрировались!"
             form = {
                 email: login,
                 password: password
             }
-            const req = makeRequest(regApi, form, 'POST')
+            const req = makeRequest(requestApi.registrApi, form, 'POST')
                 .then(data => {
                     if (data !== false) {
                         this.status = "вы успешно зарегистрировались"
