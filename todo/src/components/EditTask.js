@@ -7,9 +7,6 @@ import { Redirect } from "react-router"
 class EditTask extends Component {
      constructor(props){
          super(props);
-        //  this.title = title;
-        //  this.body = body; 
-        //  this.id = id; 
         this.title = React.createRef();
         this.body = React.createRef();
         
@@ -19,6 +16,8 @@ class EditTask extends Component {
 
 
     render(){
+     
+
         if(store.check){
             return(
                 <Redirect push to="/notes"></Redirect>
